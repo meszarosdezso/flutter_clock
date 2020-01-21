@@ -150,6 +150,7 @@ class _DigitalClockState extends State<DigitalClock> {
                       numberToAnimateTo: (_dateTime.hour % 10),
                       color: _theme['color'],
                     ),
+                    Dots(color: _theme['color']),
                     AnimatedNumber(
                       numberToAnimateTo: (_dateTime.minute / 10).floor(),
                       color: _theme['color'],
@@ -208,6 +209,37 @@ class AnimatedNumber extends StatelessWidget {
         animation:
             "from${numberToAnimateTo == 0 ? 9 : numberToAnimateTo - 1}to$numberToAnimateTo",
         color: color ?? Colors.blue.shade200,
+      ),
+    );
+  }
+}
+
+class Dots extends StatelessWidget {
+  final Color color;
+
+  const Dots({Key key, @required this.color}) : super(key: key);
+
+  Widget _buildDot() => Container(
+        width: 8,
+        height: 8,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: color,
+        ),
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 20.0,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _buildDot(),
+          SizedBox(height: 20.0),
+          _buildDot(),
+        ],
       ),
     );
   }
